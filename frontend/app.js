@@ -6,7 +6,6 @@ const msgErr = document.querySelector('#msgErr');
 const taskContainer = document.querySelector('#taskContainer');
 const popUp = document.querySelector('.popUp');
 const updateVisibility = document.querySelector('#updateButton');
-const themeBtn = document.querySelector('#themeBtn');
 
 let noteToBeDeleted = null;
 // const taskBox = document.querySelector('#taskBox');
