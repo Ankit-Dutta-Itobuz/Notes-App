@@ -1,0 +1,104 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,700&display=swap');
+
+
+body {
+    font-family: 'Press Start 2P', cursive;
+    background-color: black;
+    overflow-x: hidden;
+    /* background-image: url('./images/spaceBg.webp'); */
+}
+
+.success {
+    background-color: #00FF38;
+    /* color: #00FF38; */
+}
+
+.fail {
+    background-color: rgb(255, 0, 0);
+   /* color: #CF0000; */
+}
+
+.yellowBg {
+    background-color: #FFDD57;
+}
+
+.violetBg {
+    background-color: #D506FA;
+}
+
+.greenBg {
+    background-color: #00FF38;
+}
+
+.gradientVioletText {
+    background: #CF0000;
+    background: linear-gradient(to right, #CF0000 0%, #4400FF 63%, #00CFCF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.largeText {
+    font-size: 70px;
+    font-weight: 900;
+}
+
+.borderDashed {
+    border-style: dashed solid;
+}
+
+.popUp {
+    position: absolute;
+    backdrop-filter: blur(10px);
+    height: 100%;
+    width: 75%;
+    left: 13.2%;
+    z-index: 1;
+    visibility: collapse;
+}
+
+.popUpContent {
+    height: 200px;
+}
+
+#taskContainer {
+    max-height: 50vh;
+    overflow-y: scroll;
+}
+
+#noteText {
+    max-height: 30vh;
+    overflow-y: scroll;
+}
+
+#taskContainer::-webkit-scrollbar { 
+    display: none; 
+}
+
+#noteText::-webkit-scrollbar { 
+    display: none; 
+}
+
+#submit {
+    bottom: 0%;
+    visibility: collapse;
+}
+
+#updateButton {
+    bottom: 0%;
+    visibility: collapse;
+}
+
+.buttonScale:hover {
+    transition: all 0.1s ease-in-out;
+    scale: 1.1;
+    cursor: pointer;
+}
+
+.lightBg {
+    background-color: rgb(32,136,203)
+}
+
+.lightText {
+    color: white;
+}
