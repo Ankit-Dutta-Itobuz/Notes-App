@@ -4,19 +4,16 @@
 
 body {
     font-family: 'Press Start 2P', cursive;
-    background-color: black;
     overflow-x: hidden;
-    /* background-image: url('./images/spaceBg.webp'); */
+    background-image: url('./images/spaceBg.webp');
 }
 
 .success {
     background-color: #00FF38;
-    /* color: #00FF38; */
 }
 
 .fail {
     background-color: rgb(255, 0, 0);
-   /* color: #CF0000; */
 }
 
 .yellowBg {
