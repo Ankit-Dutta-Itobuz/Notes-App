@@ -1,12 +1,11 @@
 //express server
 import express from "express";
-import mongoose from "mongoose";
 import cors from 'cors';
 import {route} from './routes/noteRoutes.js'
-// import NotesData from './models/schema.js';
-import {config} from "./config.js";
+import { mongoConnect } from "./connection/connection.js";
 
-const port = 3000;
+
+const port = 4070;
 const app = express();
 
 //middleware important
@@ -20,22 +19,5 @@ app.use("/", route);
 app.listen(port, () => {
     console.log(`Listening to port:${port}.....`);
 });
-
-//connecting to mongodb
-const link = `mongodb+srv://${config.name}:${config.password}@${config.cluster}.mongodb.net/?retryWrites=true&w=majority`;
-
-async function mongoConnect() {
-    await mongoose
-        .connect(link, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        })
-        .then(() => {
-            console.log("Connected to MongoDb");
-        })
-        .catch((err) => {
-            console.error(err);
-        });
-}
 
 mongoConnect();

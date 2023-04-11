@@ -8,12 +8,12 @@ const popUp = document.querySelector('.popUp');
 const updateVisibility = document.querySelector('#updateButton');
 
 let noteToBeDeleted = null;
-// const taskBox = document.querySelector('#taskBox');
+const apiUrl = "http://localhost:4070/";
 
-
+//Adding notes and fetching from get api
 function getAllNotes() {
     taskContainer.innerHTML = '';
-    fetch("http://localhost:3000/getNotes")
+    fetch(`${apiUrl}getNotes`)
         .then((response) => response.json())
         .then((json) => {
             for (let i = 0; i < json.data.length; i++) {
@@ -37,8 +37,9 @@ function getAllNotes() {
     submit.classList.toggle('visible');
 }
 
+//Edit Button
 async function editNote(id) {
-    await fetch(`http://localhost:3000/note/${id}`)
+    await fetch(`${apiUrl}note/${id}`)
         .then((response) => response.json())
         .then((json) => {
             document.getElementById('title').value = json.data.title;
@@ -53,8 +54,9 @@ async function editNote(id) {
     setTimeout(() =>{ msgErr.classList.remove('success');msgErr.innerHTML = '';}, 2000);
 }
 
+//Update Function
 async function update(id) {
-    await fetch(`http://localhost:3000/update/${id}`,
+    await fetch(`${apiUrl}update/${id}`,
         {
             method: "PUT",
             headers: { "Content-type": "application/json; charset=UTF-8", },
@@ -71,12 +73,12 @@ async function update(id) {
     updateVisibility.classList.remove('visible');
     msgErr.classList.add('success');
     msgErr.innerHTML = 'Successfully Updated';
-    // setTimeout(() => msgErr.innerHTML = '', 2000);
     setTimeout(() =>{ msgErr.classList.remove('success');msgErr.innerHTML = '';}, 2000);
 }
 
+//Delete Function
 async function confirmDelete() {
-    const response = await fetch(`http://localhost:3000/delete/${noteToBeDeleted}`, {
+    const response = await fetch(`${apiUrl}delete/${noteToBeDeleted}`, {
         method: "DELETE",
     });
     getAllNotes();
@@ -96,20 +98,16 @@ function deleteNote(uniqueId) {
     popUp.classList.add('visible');
 }
 
-
-
-
+//Submit Function
 submit.addEventListener('click', onSubmit);
-async function onSubmit(e) {
-    e.preventDefault();
+async function onSubmit() {
     if (title.value.trim() === '' || text.value.trim() === '') {
         msgErr.classList.add('fail');
         msgErr.innerHTML = 'Please enter all fields';
         setTimeout(() =>{ msgErr.classList.remove('fail');msgErr.innerHTML = '';}, 2000);
-        // msgErr.classList.remove('fail');
     }
     else {
-        await fetch("http://localhost:3000/addNotes", {
+        await fetch(`${apiUrl}addNotes`, {
             method: "POST",
             body: JSON.stringify({
                 title: title.value,
@@ -128,7 +126,6 @@ async function onSubmit(e) {
         msgErr.innerHTML = 'Successfully added';
         submit.classList.add('visible');
         setTimeout(() =>{ msgErr.classList.remove('success');msgErr.innerHTML = '';}, 2000);
-        // msgErr.classList.remove('success');
     }
 }
 
