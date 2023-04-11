@@ -3,9 +3,9 @@ import express from "express";
 import cors from 'cors';
 import {route} from './routes/noteRoutes.js'
 import { mongoConnect } from "./connection/connection.js";
+import env from 'dotenv'
 
-
-const port = 4070;
+const port = process.env.PORT
 const app = express();
 
 //middleware important

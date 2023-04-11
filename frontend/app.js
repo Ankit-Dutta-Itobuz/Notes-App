@@ -8,7 +8,7 @@ const popUp = document.querySelector('.popUp');
 const updateVisibility = document.querySelector('#updateButton');
 
 let noteToBeDeleted = null;
-const apiUrl = "http://localhost:4070/";
+const apiUrl = "http://localhost:7060/";
 
 //Adding notes and fetching from get api
 function getAllNotes() {
