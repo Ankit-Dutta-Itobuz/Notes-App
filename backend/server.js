@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import cors from 'cors';
 import {route} from './routes/noteRoutes.js'
 // import NotesData from './models/schema.js';
-import config from "./config.js";
+import {config} from "./config.js";
 
 const port = 3000;
 const app = express();
@@ -22,7 +22,7 @@ app.listen(port, () => {
 });
 
 //connecting to mongodb
-const link = config.mongoUrl;
+const link = `mongodb+srv://${config.name}:${config.password}@${config.cluster}.mongodb.net/?retryWrites=true&w=majority`;
 
 async function mongoConnect() {
     await mongoose
