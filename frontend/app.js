@@ -14,7 +14,7 @@ let noteToBeDeleted = null;
 
 function getAllNotes() {
     taskContainer.innerHTML = '';
-    fetch("http://localhost:8060/getNotes")
+    fetch("http://localhost:3000/getNotes")
         .then((response) => response.json())
         .then((json) => {
             for (let i = 0; i < json.data.length; i++) {
@@ -37,10 +37,9 @@ function getAllNotes() {
         });
     submit.classList.toggle('visible');
 }
-getAllNotes();
 
 async function editNote(id) {
-    await fetch(`http://localhost:8060/note/${id}`)
+    await fetch(`http://localhost:3000/note/${id}`)
         .then((response) => response.json())
         .then((json) => {
             document.getElementById('title').value = json.data.title;
@@ -56,7 +55,7 @@ async function editNote(id) {
 }
 
 async function update(id) {
-    await fetch(`http://localhost:8060/update/${id}`,
+    await fetch(`http://localhost:3000/update/${id}`,
         {
             method: "PUT",
             headers: { "Content-type": "application/json; charset=UTF-8", },
@@ -78,13 +77,14 @@ async function update(id) {
 }
 
 async function confirmDelete() {
-    const response = await fetch(`http://localhost:8060/delete/${noteToBeDeleted}`, {
+    const response = await fetch(`http://localhost:3000/delete/${noteToBeDeleted}`, {
         method: "DELETE",
     });
     getAllNotes();
     popUp.classList.remove('visible');
     msgErr.classList.add('success');
     msgErr.innerHTML = 'Successfully Deleted';
+    submit.classList.add('visible');
     setTimeout(() =>{ msgErr.classList.remove('success');msgErr.innerHTML = '';}, 2000);
 }
 
@@ -110,7 +110,7 @@ async function onSubmit(e) {
         // msgErr.classList.remove('fail');
     }
     else {
-        await fetch("http://localhost:8060/addNotes", {
+        await fetch("http://localhost:3000/addNotes", {
             method: "POST",
             body: JSON.stringify({
                 title: title.value,
@@ -127,8 +127,10 @@ async function onSubmit(e) {
         task.value = '';
         msgErr.classList.add('success');
         msgErr.innerHTML = 'Successfully added';
+        submit.classList.add('visible');
         setTimeout(() =>{ msgErr.classList.remove('success');msgErr.innerHTML = '';}, 2000);
         // msgErr.classList.remove('success');
     }
 }
 
+getAllNotes();

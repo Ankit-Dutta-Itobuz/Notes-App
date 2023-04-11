@@ -6,7 +6,7 @@ import {route} from './routes/noteRoutes.js'
 // import NotesData from './models/schema.js';
 import config from "./config.js";
 
-const port = 8060;
+const port = 3000;
 const app = express();
 
 //middleware important
