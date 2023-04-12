@@ -3,8 +3,8 @@ import { createNote, getNotes, updateNotes, getNoteById, deleteNote } from "../c
 
 export const route = express.Router();
 
-route.post("/addNotes",createNote);
-route.get("/getNotes",getNotes);
-route.put("/update/:id",updateNotes);
-route.get("/note/:id",getNoteById);
-route.delete("/delete/:id",deleteNote);
+route.post("/addNotes", createNote);
+route.get("/getNotes", getNotes);
+route.put("/update/:id", updateNotes);
+route.get("/note/:id", getNoteById);
+route.delete("/delete/:id", deleteNote);
