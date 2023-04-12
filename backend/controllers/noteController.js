@@ -49,19 +49,19 @@ export const updateNotes = async(req, res) => {
     }
 }
 
-export const getNoteById =  async(req, res) => {
+export const getNoteById = async(req, res) => {
     try {
         const data = await NotesData.findById(req.params.id);
         if(data) {
             res.status(200).send({
                 success: true,
-                message: "fetched successfully",
+                message: "Fetched successfully",
                 data,
             })
         }
     } catch(err) {
         res.status(400).send({
-            message: "failed to get",
+            message: "Failed to get",
             success: false,
             data: null,
         });
