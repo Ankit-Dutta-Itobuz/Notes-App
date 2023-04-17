@@ -11,7 +11,11 @@ import NotesData from '../models/schema.js';
             });
         });
     } catch (err) {
-        res.status(400).send(err);
+        res.status(400).send({
+            message: "Failed to create",
+            success: false,
+            data: null,
+        });
     }
 };
 
@@ -26,7 +30,11 @@ export const getNotes = async (req, res) => {
             });
         });
     } catch (err) {
-        res.status(400).send(err);
+        res.status(400).send({
+            message: "Failed to find",
+            success: false,
+            data: null,
+        });
     }
 };
 
@@ -45,7 +53,11 @@ export const updateNotes = async(req, res) => {
             });
         });
     } catch (err) {
-        res.status(400).send(err);
+        res.status(400).send({
+            message: "Failed to update",
+            success: false,
+            data: null,
+        });
     }
 }
 
@@ -80,6 +92,10 @@ export const deleteNote = (req, res) => {
                 });
             });
     } catch (err) {
-        res.status(400).send(err);
+        res.status(400).send({
+            message: "Failed to delete",
+            success: false,
+            data: null,
+        });
     }
 };
