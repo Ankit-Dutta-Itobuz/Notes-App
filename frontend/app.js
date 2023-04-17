@@ -1,6 +1,6 @@
 const form = document.querySelector('#form');
 const title = document.querySelector('#title');
-const text = document.querySelector('#task');
+const description = document.querySelector('#task');
 const submit = document.querySelector('#submit');
 const msgErr = document.querySelector('#msgErr');
 const taskContainer = document.querySelector('#taskContainer');
@@ -22,7 +22,7 @@ function getAllNotes() {
                     `<div class="card col-xl-3 col-lg-4 col-md-6 col-8 my-auto yellowBg">
                     <div class="card-body d-flex flex-column gap-3 justify-content-evenly align-items-evenly">
                       <h5 class="card-title" id="noteTitle">${json.data[i].title}</h5>
-                      <p class="card-text" id="noteText">${json.data[i].text}</p>
+                      <p class="card-text" id="noteText">${json.data[i].description}</p>
                       <div class="buttonBox row justify-content-around">
                         <button href="#" id="edit" class="buttonScale col-xl-5 col-lg-6 col-6 violetBg" onclick="editNote('${json.data[i]._id}')"><div class="row justify-content-center">
                         <img src="./images/edit-cover-1481-svgrepo-com.svg" class="col-6" alt="edit logo not found">
@@ -44,7 +44,7 @@ async function editNote(id) {
         .then((response) => response.json())
         .then((json) => {
             document.getElementById('title').value = json.data.title;
-            document.getElementById('task').value = json.data.text;
+            document.getElementById('task').value = json.data.description;
         })
     document.getElementById('updateButton')
         .setAttribute("onclick", `update('${id}')`);
@@ -57,24 +57,31 @@ async function editNote(id) {
 
 //Update Function
 async function update(id) {
-    await fetch(`${apiUrl}update/${id}`,
-        {
-            method: "PUT",
-            headers: { "Content-type": "application/json; charset=UTF-8", },
-            body: JSON.stringify({
-                title: document.getElementById('title').value,
-                text: document.getElementById('task').value
-            }),
-        }).then((res) => {
-            getAllNotes();
-        })
-        .catch((err) => console.log(err));
-    document.getElementById('title').value = '';
-    document.getElementById('task').value = '';
-    updateVisibility.classList.remove('visible');
-    msgErr.classList.add('success');
-    msgErr.innerHTML = 'Successfully Updated';
-    setTimeout(() =>{ msgErr.classList.remove('success');msgErr.innerHTML = '';}, 2000);
+    if (title.value.trim() === '' || description.value.trim() === '') {
+        msgErr.classList.add('fail');
+        msgErr.innerHTML = 'Please enter all fields';
+        setTimeout(() =>{ msgErr.classList.remove('fail');msgErr.innerHTML = '';}, 2000);
+    }
+    else {
+            await fetch(`${apiUrl}update/${id}`,
+            {
+                method: "PUT",
+                headers: { "Content-type": "application/json; charset=UTF-8", },
+                body: JSON.stringify({
+                    title: document.getElementById('title').value,
+                    description: document.getElementById('task').value
+                }),
+            }).then((res) => {
+                getAllNotes();
+            })
+            .catch((err) => console.log(err));
+        document.getElementById('title').value = '';
+        document.getElementById('task').value = '';
+        updateVisibility.classList.remove('visible');
+        msgErr.classList.add('success');
+        msgErr.innerHTML = 'Successfully Updated';
+        setTimeout(() =>{ msgErr.classList.remove('success');msgErr.innerHTML = '';}, 2000);
+}
 }
 
 //Delete Function
@@ -102,7 +109,7 @@ function deleteNote(uniqueId) {
 //Submit Function
 submit.addEventListener('click', onSubmit);
 async function onSubmit() {
-    if (title.value.trim() === '' || text.value.trim() === '') {
+    if (title.value.trim() === '' || description.value.trim() === '') {
         msgErr.classList.add('fail');
         msgErr.innerHTML = 'Please enter all fields';
         setTimeout(() =>{ msgErr.classList.remove('fail');msgErr.innerHTML = '';}, 2000);
@@ -112,7 +119,7 @@ async function onSubmit() {
             method: "POST",
             body: JSON.stringify({
                 title: title.value,
-                text: text.value,
+                description: description.value,
             }),
             headers: {
                 "Content-type": "application/json; charset=UTF-8",
