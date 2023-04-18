@@ -17,9 +17,9 @@ mongoConnect();
 
 //api
 app.use("/", route);
-// app.use(function(req, res, next){
-//     res.status(404).render('Error 404', {title: "Sorry, page not found"});
-// });
+app.use(function(req, res, next){
+    next(new Error("Page not found"));
+});
 app.use((error, request, response, next)=> {
     if(error){
         response.send({

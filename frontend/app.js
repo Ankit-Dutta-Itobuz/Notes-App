@@ -1,4 +1,3 @@
-const form = document.querySelector('#form');
 const title = document.querySelector('#title');
 const description = document.querySelector('#task');
 const submit = document.querySelector('#submit');
@@ -8,7 +7,7 @@ const popUp = document.querySelector('.popUp');
 const updateVisibility = document.querySelector('#updateButton');
 
 let noteToBeDeleted = null;
-const port = 7060;
+let port = 7060;
 const apiUrl = `http://localhost:${port}/`;
 
 //Adding notes and fetching from get api
